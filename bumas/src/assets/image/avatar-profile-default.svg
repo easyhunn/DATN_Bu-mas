@@ -1,0 +1,31 @@
+<svg id="avatar-profile-default" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fff;
+        stroke: #fff;
+      }
+
+      .cls-2, .cls-4 {
+        fill: none;
+      }
+
+      .cls-2 {
+        stroke: #b5b5b5;
+        stroke-miterlimit: 10;
+      }
+
+      .cls-3 {
+        stroke: none;
+      }
+    </style>
+  </defs>
+  <g id="Ellipse_2" data-name="Ellipse 2" class="cls-1">
+    <circle class="cls-3" cx="15" cy="15" r="15"/>
+    <circle class="cls-4" cx="15" cy="15" r="14.5"/>
+  </g>
+  <g id="Group_27513" data-name="Group 27513" transform="translate(6.5 6.5)">
+    <path id="Path_29874" data-name="Path 29874" class="cls-2" d="M16.5,15.213A8.176,8.176,0,0,0,12.767,8.92a2.04,2.04,0,0,0-1.92,0A3.84,3.84,0,0,1,8.5,9.667,3.635,3.635,0,0,1,6.153,8.92a1.6,1.6,0,0,0-1.92,0A7.741,7.741,0,0,0,.5,15.213a.5.5,0,0,0,.533.533H15.967A.571.571,0,0,0,16.5,15.213Z" transform="translate(0 0.54)"/>
+    <circle id="Ellipse_1820" data-name="Ellipse 1820" class="cls-2" cx="3.733" cy="3.733" r="3.733" transform="translate(4.767 0.5)"/>
+  </g>
+</svg>

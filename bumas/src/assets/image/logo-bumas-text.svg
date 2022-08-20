@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="637" height="115" viewBox="0 0 637 115">
+  <defs>
+    <clipPath id="clip-Logo-Bumas-Text">
+      <rect width="637" height="115"/>
+    </clipPath>
+  </defs>
+  <g id="Logo-Bumas-Text" clip-path="url(#clip-Logo-Bumas-Text)">
+    <text id="MISA_Bumas" data-name="MISA Bumas" transform="translate(34 93)" fill="#fff" font-size="98" font-family="Roboto-Bold, Roboto" font-weight="700"><tspan x="0" y="0">MISA Bumas</tspan></text>
+  </g>
+</svg>

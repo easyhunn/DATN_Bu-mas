@@ -1,0 +1,120 @@
+.m-tree-node {
+  margin-left: 2px;
+  margin-top: 8px;
+}
+
+//region
+.table {
+  &.table-view {
+    @for $i from 1 through 10 {
+      .m-parent-row.m-child-row.m-grade-#{$i} {
+        .m-tree-node {
+          left: (20 * $i + 10) + px;
+        }
+      }
+      .m-grade-#{$i} td.tree-field + td:not(:empty) {
+        .content-padding {
+          content: " ";
+          padding-left: (20 * $i) + px;
+        }
+      }
+    }
+  }
+}
+
+.center-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+// button
+.btn {
+  // min-width: 96px;
+}
+
+[type="button"]:not(:disabled),
+[type="reset"]:not(:disabled),
+[type="submit"]:not(:disabled),
+button:not(:disabled) {
+  cursor: pointer;
+}
+.title-header {
+  font-family: Roboto-Black;
+  margin-left: 10px;
+  font-size: 15px;
+  color: #555;
+  font-weight: 600;
+}
+
+//tool tip
+.popover {
+  .arrow {
+    height: 18px;
+    width: 18px;
+    transform: rotate(45deg);
+    box-shadow: 0 0 6px rgb(0 0 0 / 16%);
+    position: absolute;
+    top: -6px;
+    right: 70px;
+    z-index: -1;
+    background-color: #f5f5f5;
+  }
+  .popover-body {
+    padding: 0 !important;
+    .popover-gr-item {
+      z-index: 1;
+      position: relative;
+      background-color: #fff;
+      padding: 10px;
+      .dropdown-item {
+        &:hover {
+          background-color: #f8f9fa;
+        }
+        color: #38393d;
+        padding: 6px 20px;
+        font-family: Roboto-Regular;
+        font-size: 13px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        position: relative;
+        display: block;
+        width: 100%;
+        clear: both;
+        text-align: inherit;
+        white-space: nowrap;
+        background-color: transparent;
+        border: 0;
+      }
+    }
+  }
+}
+
+.upper-case {
+  text-transform: uppercase;
+}
+.row {
+  margin-right: 0;
+  margin-left: 0;
+}
+
+// fix width
+.w-100px {
+  min-width: 100px;
+  width: 100px;
+  max-width: 100px;
+}
+.w-200px {
+  min-width: 200px;
+  width: 200px;
+  max-width: 200px;
+}
+.w-250px {
+  min-width: 250px;
+  width: 250px;
+  max-width: 250px;
+}
+.w-35px {
+  min-width: 35px;
+  width: 35px;
+  max-width: 35px;
+}

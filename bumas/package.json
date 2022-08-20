@@ -1,0 +1,36 @@
+{
+  "name": "bumas",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build"
+  },
+  "dependencies": {
+    "@grapecity/spread-excelio": "^15.1.4",
+    "@grapecity/spread-sheets-charts": "^15.1.4",
+    "@grapecity/spread-sheets-vue": "^15.1.4",
+    "bootstrap": "^4.5.3",
+    "bootstrap-vue": "^2.22.0",
+    "file-saver": "^2.0.5",
+    "vue": "^2.6.14",
+    "vue-click-outside": "^1.1.0",
+    "vue-router": "^3.5.1",
+    "vuex": "^3.6.2"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss7-compat": "^2.2.17",
+    "@vue/cli-plugin-router": "~5.0.0",
+    "@vue/cli-plugin-vuex": "~5.0.0",
+    "@vue/cli-service": "~5.0.0",
+    "autoprefixer": "^9.8.8",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^8.2.5",
+    "babel-preset-env": "^1.7.0",
+    "postcss": "^7.0.39",
+    "sass": "^1.32.7",
+    "sass-loader": "^12.0.0",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.17",
+    "vue-template-compiler": "^2.6.14"
+  }
+}

@@ -1,0 +1,46 @@
+body {
+  font-size: 13px;
+  background-color: #fff;
+  .form-control {
+    font-size: 13px;
+    padding-left: 8px;
+  }
+
+  .m-nav {
+    &.nav-container {
+      height: 43px;
+      min-height: 43px;
+      max-height: 43px;
+      background-color: #f5f5f5;
+      .nav {
+        display: flex;
+        .nav-item {
+          &.active {
+            background-color: #fff;
+            border-radius: 4px 4px 0 0;
+            font-weight: 600;
+            color: #333 !important;
+            border-top: 1.5px solid #15ab15;
+            border-radius: 0;
+          }
+          font-size: 14px;
+          color: #a9a9a9 !important;
+          background-color: #f5f5f5;
+          border-top: 1.5px solid #f5f5f5;
+          border-radius: 0;
+          margin-bottom: 0;
+          cursor: pointer;
+          padding: 10px 25px;
+          border: none;
+        }
+      }
+    }
+  }
+  .m-header {
+    white-space: nowrap;
+    font-size: 25px;
+    font-family: Roboto-Medium;
+    color: #454f63;
+    display: flex;
+  }
+}
