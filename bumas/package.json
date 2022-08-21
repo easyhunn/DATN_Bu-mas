@@ -10,6 +10,7 @@
     "@grapecity/spread-excelio": "^15.1.4",
     "@grapecity/spread-sheets-charts": "^15.1.4",
     "@grapecity/spread-sheets-vue": "^15.1.4",
+    "axios": "^0.27.2",
     "bootstrap": "^4.5.3",
     "bootstrap-vue": "^2.22.0",
     "file-saver": "^2.0.5",
