@@ -42,7 +42,6 @@
       :border="true"
       :hover="true"
       responsive="sm"
-      head-variant="light"
       table-variant="none"
       thead-tr-class="custom-th-row"
       :tbody-tr-class="setRowStyle"
@@ -165,10 +164,6 @@ export default {
     striped: {
       default: true,
       type: Boolean,
-    },
-    headerVariants: {
-      default: "light",
-      type: string,
     },
   },
   data() {

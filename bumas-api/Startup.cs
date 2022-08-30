@@ -1,3 +1,7 @@
+using CoreBL.Base;
+using CoreBL.Interface;
+using CoreDL.Interface;
+using CoreDL;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -7,6 +11,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using MISA.VMHUNG.Core.Interface;
+using MISA.VMHUNG.Core.Service;
+using MISA.VMHUNG.Infrastructure.DataAccess;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,6 +40,8 @@ namespace bumas_api
                 options.JsonSerializerOptions.PropertyNamingPolicy = null;
             }
             );
+            addServiceScoped(ref services);
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "bumas_api", Version = "v1" });
@@ -60,6 +69,17 @@ namespace bumas_api
             {
                 endpoints.MapControllers();
             });
+
         }
+
+        #region custom function
+        public  void addServiceScoped(ref IServiceCollection services) {
+            services.AddScoped(typeof(IBaseBL<>), typeof(BaseBL<>));
+            services.AddScoped(typeof(IBaseDL<>), typeof(BaseDL<>));
+
+            services.AddScoped(typeof(ITestBL), typeof(TestBL));
+            services.AddScoped(typeof(ITestDL), typeof(TestDL));
+        }
+        #endregion
     }
 }

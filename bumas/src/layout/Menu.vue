@@ -159,9 +159,10 @@ export default {
   watch: {
     currentRoute() {
       let me = this;
-      this.selectedMenu = this.menuList.findIndex((item) => {
+      let selectedItem = this.menuList.find((item) => {
         return item.route.toLowerCase() == me.$route.path.toLowerCase();
       });
+      this.selectedMenu = selectedItem?.id;
     },
   },
 };

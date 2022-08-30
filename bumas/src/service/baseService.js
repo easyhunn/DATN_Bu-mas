@@ -5,10 +5,10 @@ const CORE = "core",
 
 export let baseService = {
   get(type, controller, url = "") {
-    let domain = "";
+    let domain = "https://localhost:44370";
     if (type.toLowerCase() == CORE) {
-      domain = "https://localhost:44370";
+      // domain = "https://localhost:44370";
     }
-    return axios.get(`${domain}/${controller}/${url}`);
+    return axios.get(`${domain}/api/${controller}/${url}`);
   },
 };
