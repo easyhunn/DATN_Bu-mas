@@ -1,6 +1,8 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import testStore from "./Module/test";
+import authenStore from "./Module/authen";
+
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -16,5 +18,6 @@ export default new Vuex.Store({
   },
   modules: {
     test: testStore,
+    authen: authenStore,
   },
 });

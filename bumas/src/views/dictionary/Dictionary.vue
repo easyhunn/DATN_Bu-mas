@@ -8,6 +8,7 @@
 
 <script>
 import { mapActions, mapState } from "vuex";
+import axios from "axios";
 
 export default {
   name: "Dictionary",
@@ -25,9 +26,9 @@ export default {
     },
   },
   mounted() {
-    // axios
-    //   .get("https://localhost:44370/WeatherForecast")
-    //   .then((response) => (this.info = response));
+    axios
+      .get("https://localhost:44370/api/Test")
+      .then((response) => (this.info = response));
   },
   computed: {
     ...mapState({

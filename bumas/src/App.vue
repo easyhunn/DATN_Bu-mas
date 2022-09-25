@@ -1,11 +1,11 @@
 <template>
   <div id="app">
     <div class="app-container">
-      <div class="layout-menu">
+      <div class="layout-menu" v-if="isLogin">
         <Menu></Menu>
       </div>
       <div class="layout-content">
-        <div class="content-header">
+        <div class="content-header" v-if="isLogin">
           <Header></Header>
         </div>
         <div class="content-container">
@@ -21,6 +21,7 @@ import Menu from "./layout/Menu.vue";
 import Header from "./layout/Header.vue";
 import "@grapecity/spread-sheets-vue";
 import "@grapecity/spread-sheets/styles/gc.spread.sheets.excel2013white.css";
+import { mapState, mapGetters } from "vuex";
 
 export default {
   name: "App",
@@ -32,6 +33,12 @@ export default {
     return {};
   },
   methods: {},
+  computed: {
+    ...mapState({}),
+    ...mapGetters({
+      isLogin: "authen/loginStatus",
+    }),
+  },
 };
 </script>
 

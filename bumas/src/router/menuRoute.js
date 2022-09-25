@@ -1,6 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import HomeView from "../views/HomeView.vue";
+import store from "../store/index";
+
 import Summary from "../views/summary/Summary.vue";
 import EstimateSummary from "../views/estimatesummary/EstimateSummary.vue";
 import SymmetricalEstimate from "../views/symmetricalestimate/SymmetricalEstimate.vue";
@@ -8,59 +9,63 @@ import Allocation from "../views/allocation/Allocation.vue";
 import ReportContainer from "../views/report/ReportContainer.vue";
 import Other from "../views/other/Other.vue";
 import Dictionary from "../views/dictionary/Dictionary.vue";
+import Login from "../views/authen/Login.vue";
 
 Vue.use(VueRouter);
 
 const routes = [
   {
+    path: "/login",
+    name: "login",
+    component: Login,
+  },
+  {
     path: "/",
-    name: "home",
-    component: HomeView,
+    name: "Summary",
+    component: Summary,
+    meta: { requiresAuth: true },
   },
   {
     path: "/examine",
     name: "Summary",
     component: Summary,
+    meta: { requiresAuth: true },
   },
   {
     path: "/estimatesummary",
     name: "EstimateSummary",
     component: EstimateSummary,
+    meta: { requiresAuth: true },
   },
   {
     path: "/symmetricalestimate",
     name: "SymmetricalEstimate",
     component: SymmetricalEstimate,
+    meta: { requiresAuth: true },
   },
   {
     path: "/report",
     name: "Report",
     component: ReportContainer,
+    meta: { requiresAuth: true },
   },
   {
     path: "/allocation",
     name: "Allocation",
     component: Allocation,
+    meta: { requiresAuth: true },
   },
   {
     path: "/dictionary",
     name: "Dictionary",
     component: Dictionary,
+    meta: { requiresAuth: true },
   },
   {
     path: "/other",
     name: "Other",
     component: Other,
-  },
-  {
-    path: "/about",
-    name: "about",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: function () {
-      return import(/* webpackChunkName: "about" */ "../views/AboutView.vue");
-    },
+    meta: { requiresAuth: true },
   },
 ];
 
@@ -70,4 +75,16 @@ const router = new VueRouter({
   routes,
 });
 
+router.beforeEach((to, from, next) => {
+  // get current user info
+  // const isLogin = Auth.state.isLogin;
+  if (to.name == "login") {
+    store.dispatch("authen/signOut");
+  }
+  const isLogin = store.getters["authen/loginStatus"];
+  const requiresAuth = to.matched.some((record) => record.meta.requiresAuth);
+
+  if (requiresAuth && !isLogin) next("/login");
+  else next();
+});
 export default router;

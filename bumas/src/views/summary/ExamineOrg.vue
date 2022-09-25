@@ -48,6 +48,9 @@ export default {
       }
     },
   },
+  mounted() {
+    this.testFn();
+  },
 };
 </script>
 

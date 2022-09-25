@@ -1,0 +1,15 @@
+D:\Đồ án\CoreBL\bin\Debug\net5.0\CoreBL.deps.json
+D:\Đồ án\CoreBL\bin\Debug\net5.0\CoreBL.dll
+D:\Đồ án\CoreBL\bin\Debug\net5.0\ref\CoreBL.dll
+D:\Đồ án\CoreBL\bin\Debug\net5.0\CoreBL.pdb
+D:\Đồ án\CoreBL\bin\Debug\net5.0\CoreDL.dll
+D:\Đồ án\CoreBL\bin\Debug\net5.0\CoreDL.pdb
+D:\Đồ án\CoreBL\obj\Debug\net5.0\CoreBL.csprojAssemblyReference.cache
+D:\Đồ án\CoreBL\obj\Debug\net5.0\CoreBL.GeneratedMSBuildEditorConfig.editorconfig
+D:\Đồ án\CoreBL\obj\Debug\net5.0\CoreBL.AssemblyInfoInputs.cache
+D:\Đồ án\CoreBL\obj\Debug\net5.0\CoreBL.AssemblyInfo.cs
+D:\Đồ án\CoreBL\obj\Debug\net5.0\CoreBL.csproj.CoreCompileInputs.cache
+D:\Đồ án\CoreBL\obj\Debug\net5.0\CoreBL.csproj.CopyComplete
+D:\Đồ án\CoreBL\obj\Debug\net5.0\CoreBL.dll
+D:\Đồ án\CoreBL\obj\Debug\net5.0\ref\CoreBL.dll
+D:\Đồ án\CoreBL\obj\Debug\net5.0\CoreBL.pdb

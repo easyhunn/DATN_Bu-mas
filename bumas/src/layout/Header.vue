@@ -241,15 +241,10 @@
       </div>
       <div class="user-header">
         <div class="sepetator d-none"></div>
-
-        <div class="username d-none" data-toggle="dropdown" id="more-setting">
-          đặng giang sơn
-        </div>
-
         <div
           class="avatar"
           data-toggle="dropdown"
-          id="more-setting"
+          id="more-setting-avatar"
           style="
             background: url(https://id.misa.vn/image/getavatar?userId=8d1489f7-55ba-4f6c-a29b-bc992300e83d&amp;width=100&amp;height=100)
               center no-repeat;
@@ -263,6 +258,22 @@
           area-labelledby="more-setting"
           id="userSetting"
         ></div>
+        <b-popover
+          show.sync="true"
+          target="more-setting"
+          container="header"
+          offset=""
+          placement="bottom"
+        >
+          <div class="popover-gr-item">
+            <a
+              class="dropdown-item business-item summary selected"
+              href="#"
+              title="Tổng hợp"
+              >Đăng xuất</a
+            >
+          </div>
+        </b-popover>
       </div>
     </div>
   </header>
@@ -278,6 +289,7 @@ export default {
     return {
       showSetting: false,
       showBusinessToggle: false,
+      showSettingToggle: true,
     };
   },
   methods: {
