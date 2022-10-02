@@ -4,23 +4,28 @@ export let fields = [
 ];
 export let items = [
   {
-    code: "Mẫu biểu số 15.1",
-    name: "	Cơ sở tính chi hoạt động của các cơ quan quản lý nhà nước, Đảng, đoàn thể",
+    code: "Mẫu biểu số 05",
+    name: "DỰ TOÁN THU, CHI NGÂN SÁCH NHÀ NƯỚC NĂM 2023",
+    reportCode: "MB05",
   },
   {
-    code: "Mẫu biểu số 15.2",
-    name: "Cân đối ngân sách địa phương",
+    code: "Mẫu biểu số 06",
+    name: "DỰ TOÁN BỔ SUNG CÓ MỤC TIÊU TỪ NGÂN SÁCH CẤP TỈNH CHO NGÂN SÁCH CẤP HUYỆN",
+    reportCode: "MB06",
   },
   {
-    code: "Mẫu biểu số 15.3",
-    name: "Dự toán thu từ hoạt động cung cấp dịch vụ của đơn vị sự nghiệp công lập (không bao gồm nguồn NSNN đặt hàng, giao nhiệm vụ)",
+    code: "Mẫu biểu số 07",
+    name: "TỔNG HỢP DỰ TOÁN CHI NĂM 2023",
+    reportCode: "MB07",
   },
   {
     code: "Mẫu biểu số 15.4",
     name: "	Dự toán chi ngân sách huyện, chi ngân sách cấp huyện và chi ngân sách xã theo cơ cấu chi",
+    reportCode: "MB05",
   },
   {
     code: "Mẫu biểu số 15.5",
     name: "Dự toán chi ngân sách cấp huyện theo từng lĩnh vực",
+    reportCode: "MB05",
   },
 ];

@@ -1,6 +1,5 @@
 <template>
   <div class="report">
-    <MDialogVue v-show="isShowModal" @dialogRes="dialogRes"> </MDialogVue>
     <div class="action-container"></div>
     <EditableTable
       v-model="items"
@@ -11,11 +10,11 @@
       :displayFilter="true"
       :striped="false"
       headerVariants="none"
+      @on-click-row="onClickRow"
     >
     </EditableTable>
   </div>
 </template>
-
 <script>
 import EditableTable from "@/components/EditableTable.vue";
 import MDialogVue from "@/components/MDialog.vue";
@@ -35,19 +34,10 @@ export default {
     };
   },
   methods: {
-    /**
-     * Thay đổi mode xem/ sửa
-     */
-    changeEditMode(mode) {
-      this.editMode = mode;
-    },
-    openModal() {
-      this.isShowModal = true;
-    },
-    dialogRes(res) {
-      if (res == 2) {
-        this.isShowModal = false;
-      }
+    onClickRow(item, index, event) {
+      let reportCode = item.reportCode,
+        params = { ReportName: item.name };
+      this.$emit("show-report-view", reportCode, params);
     },
   },
 };

@@ -1,11 +1,11 @@
 <template>
   <div id="app">
     <div class="app-container">
-      <div class="layout-menu" v-if="isLogin">
+      <div class="layout-menu" v-if="true">
         <Menu></Menu>
       </div>
       <div class="layout-content">
-        <div class="content-header" v-if="isLogin">
+        <div class="content-header" v-if="true">
           <Header></Header>
         </div>
         <div class="content-container">

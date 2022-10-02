@@ -15,6 +15,7 @@ import "./scss/icon.scss";
 import "./scss/common.scss";
 
 import commonMixin from "./assets/mixin/common.js";
+import { Stimulsoft } from "stimulsoft-reports-js/Scripts/stimulsoft.blockly.editor";
 
 // Make BootstrapVue available throughout your project
 Vue.use(BootstrapVue);
@@ -23,41 +24,16 @@ Vue.use(IconsPlugin);
 Vue.mixin({
   ...commonMixin,
 });
-
+Vue.prototype.Stimulsoft = Stimulsoft;
 Vue.config.productionTip = false;
 axios.defaults.withCredentials = true;
 axios.defaults.baseURL = "http://localhost:44370";
-// axios.defaults.headers.common["Access-Control-Allow-Origin"] = "*";
-
-// axios.interceptors.request.use(
-//   (config) => {
-//     const authToken = store.getters["auth/authToken"];
-//     if (authToken) {
-//       config.headers.Authorization = `Bearer ${authToken}`;
-//     }
-//     return config;
-//   },
-//   (err) => {
-//     return Promise.reject(err);
-//   }
-// );
 axios.interceptors.request.use((request) => {
   if (store.state.authen.jwtToken)
     request.headers["Authorization"] = "Bearer " + store.state.authen.jwtToken;
   return request;
 });
 
-/**expired session */
-// axios.interceptors.response.use(undefined, function (error) {
-//   if (error) {
-//     const originalRequest = error.config;
-//     if (error.response.status === 401 && !originalRequest._retry) {
-//       originalRequest._retry = true;
-//       store.dispatch("LogOut");
-//       return router.push("/login");
-//     }
-//   }
-// });
 new Vue({
   store,
   router,

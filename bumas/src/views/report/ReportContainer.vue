@@ -15,18 +15,22 @@
       </div>
     </nav>
     <div class="report-content">
-      <Report v-if="activeNav == 1"></Report>
+      <Report v-if="activeNav == 1" @show-report-view="showReportViewer">
+      </Report>
+      <!-- <ReportViewer v-if="isShowReportViewer"></ReportViewer> -->
     </div>
   </div>
 </template>
 
 <script>
 import Report from "./Report.vue";
+import ReportViewer from "./ReportViewer.vue";
 
 export default {
   name: "ReportContainer",
   components: {
     Report: Report,
+    ReportViewer: ReportViewer,
   },
   data: function () {
     return {
@@ -37,7 +41,24 @@ export default {
         },
       ],
       activeNav: 1,
+      isShowReportViewer: false,
     };
+  },
+  methods: {
+    showReportViewer(reportCode, params) {
+      // let route = this.$router.resolve({
+      //   name: "ReportViewer",
+      //   params: { orgId: "123455" },
+      //   query: { reportCode: reportCode },
+      // });
+      // window.open(route.href, "_blank"); => k mang params theo được
+
+      this.$router.push({
+        name: "ReportViewer",
+        params: params,
+        query: { reportCode: reportCode },
+      });
+    },
   },
 };
 </script>

@@ -45,6 +45,7 @@
       table-variant="none"
       thead-tr-class="custom-th-row"
       :tbody-tr-class="setRowStyle"
+      @row-clicked="onClickRow"
     >
       <template
         v-for="(field, index) in tableFields"
@@ -148,7 +149,6 @@
 </template>
 
 <script>
-import { string } from "postcss-selector-parser";
 import ClickOutside from "vue-click-outside";
 
 export default {
@@ -293,6 +293,15 @@ export default {
         }
       }
       return listRow;
+    },
+    /**
+     * sực kiện click row
+     * @param {*} item
+     * @param {*} index
+     * @param {*} e
+     */
+    onClickRow(item, index, e) {
+      this.$emit("on-click-row", item, index, e);
     },
   },
   mounted() {

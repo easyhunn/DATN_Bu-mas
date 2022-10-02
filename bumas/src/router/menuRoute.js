@@ -10,9 +10,9 @@ import ReportContainer from "../views/report/ReportContainer.vue";
 import Other from "../views/other/Other.vue";
 import Dictionary from "../views/dictionary/Dictionary.vue";
 import Login from "../views/authen/Login.vue";
+import ReportViewer from "../views/report/ReportViewer.vue";
 
 Vue.use(VueRouter);
-
 const routes = [
   {
     path: "/login",
@@ -67,6 +67,12 @@ const routes = [
     component: Other,
     meta: { requiresAuth: true },
   },
+  {
+    path: "/report-viewer",
+    name: "ReportViewer",
+    component: ReportViewer,
+    meta: { requiresAuth: true },
+  },
 ];
 
 const router = new VueRouter({
@@ -81,9 +87,9 @@ router.beforeEach((to, from, next) => {
   if (to.name == "login") {
     store.dispatch("authen/signOut");
   }
-  const isLogin = store.getters["authen/loginStatus"];
+  let isLogin = store.getters["authen/loginStatus"];
   const requiresAuth = to.matched.some((record) => record.meta.requiresAuth);
-
+  isLogin = true;
   if (requiresAuth && !isLogin) next("/login");
   else next();
 });

@@ -3,7 +3,6 @@
     class="menu-side-bar"
     v-bind:class="[isMinimize ? 'mini-sidebar' : 'large-sidebar']"
   >
-    <!--logo trang cukcuk-->
     <div class="logo-site d-flex" style="border-bottom: 1px solid #f3f4f6">
       <a class="logo" v-on:click="resizeMenu()" href="#" style=""></a>
       <a class="logo logo-text" href="/examine"></a>
@@ -108,6 +107,54 @@ export default {
           icon: "icon-back",
         },
       ],
+      menuListTree: [
+        {
+          name: "Kiểm tra",
+          route: "/examine",
+          id: 0,
+        },
+        {
+          name: "Tổng hợp",
+          route: "/estimatesummary",
+          id: 1,
+        },
+
+        {
+          name: "Lập và cân đối",
+          route: "/symmetricalestimate",
+          id: 2,
+        },
+        {
+          name: "Phân bổ, giao dự toán",
+          route: "/allocation",
+          id: 3,
+        },
+        {
+          name: "Theo dõi thực hiện",
+          route: "/movie",
+          id: 7,
+        },
+        {
+          name: "Báo cáo",
+          route: "/report",
+          id: 8,
+        },
+        {
+          name: "Báo cáo",
+          route: "/report-viewer",
+          id: 8,
+        },
+        {
+          name: "Danh mục",
+          route: "/dictionary",
+          id: 9,
+        },
+        {
+          name: "Khác",
+          route: "/other",
+          id: 10,
+        },
+      ],
       selectedMenu: 1,
       isMinimize: false,
     };
@@ -136,7 +183,7 @@ export default {
   },
   mounted() {
     let me = this;
-    let selectItem = this.menuList.find((item) => {
+    let selectItem = this.menuListTree.find((item) => {
       return item.route.toLowerCase() == me.$route.path.toLowerCase();
     });
     if (selectItem && selectItem.id) {
@@ -159,7 +206,7 @@ export default {
   watch: {
     currentRoute() {
       let me = this;
-      let selectedItem = this.menuList.find((item) => {
+      let selectedItem = this.menuListTree.find((item) => {
         return item.route.toLowerCase() == me.$route.path.toLowerCase();
       });
       this.selectedMenu = selectedItem?.id;
