@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using CoreBL.Interface;
+using Entity;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System;
@@ -21,7 +23,11 @@ namespace bumas_api.Controllers
     {
         private static readonly SigningCredentials SigningCreds = new SigningCredentials(Startup.SecurityKey, SecurityAlgorithms.HmacSha256);
         private readonly JwtSecurityTokenHandler _tokenHandler = new JwtSecurityTokenHandler();
-
+        private IAccountBL _AccountBL;
+        public AccountController(IAccountBL AccountBL)
+        {
+            this._AccountBL = AccountBL;
+        }
         [HttpPost("login")]
         public async Task Login([FromBody] LoginCredentials creds)
         {
@@ -54,13 +60,30 @@ namespace bumas_api.Controllers
                 token = _tokenHandler.WriteToken(token),
                 name = principal.Identity.Name,
                 email = principal.FindFirstValue(ClaimTypes.Email),
-                role = principal.FindFirstValue(ClaimTypes.Role)
+                role = principal.FindFirstValue(ClaimTypes.Role),
+                orgId = AuthUtil.orgId,
+                userName = AuthUtil.userName,
+                orgGrade = AuthUtil.orgGrade
             };
         }
         private bool ValidateLogin(LoginCredentials creds)
         {
+            var res = false;
+            var user = _AccountBL.getUserInfo(creds.Email, creds.Password);
+            if (user != null && user.id != null && user.id != Guid.Empty)
+            {
+                AuthUtil.userName = user.user_name;
+                AuthUtil.orgId = user.org_id;
+                AuthUtil.parentOrgId = user.parent_org_id;
+                AuthUtil.userId = user.id;
+                AuthUtil.orgGrade = user.org_grade;
+                res = true;
+            } else
+            {
+                res = false;
+            }
             // For our sample app, all logins are successful!
-            return true;
+            return res;
         }
         private ClaimsPrincipal GetPrincipal(LoginCredentials creds, string authScheme)
         {

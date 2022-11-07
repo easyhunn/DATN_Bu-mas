@@ -67,6 +67,7 @@ export default {
   height: 100%;
   .symmetrical-estimate-container {
     padding: 15px;
+    height: calc(100% - 43px);
     .container {
     }
   }

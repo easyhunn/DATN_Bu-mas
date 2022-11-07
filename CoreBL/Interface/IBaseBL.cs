@@ -17,6 +17,13 @@ namespace MISA.VMHUNG.Core.Interface
         /// Created By: VM Hùng (12/04/2021)
         ServiceResult GetAll();
         /// <summary>
+        /// lấy danh sách đơn vị trực thuộc
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        /// Created By: VM Hùng (12/04/2021)
+        //ServiceResult GetSubOrg();
+        /// <summary>
         /// lấy khách hàng theo ID
         /// </summary>
         /// <typeparam name="ServiceResult"></typeparam>

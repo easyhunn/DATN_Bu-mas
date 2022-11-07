@@ -29,10 +29,10 @@ namespace MISA.VMHUNG.Core.Service
         {
             // Lấy tất cả bản ghi
             serviceResult.isSuccess = true;
-            var customers = _baseRepository.GetAll<City>();
+            var datas = _baseRepository.GetAll<T>();
 
             // Kiểm tra số lượng bản ghi trả về
-            if (customers.Count() == 0)
+            if (datas.Count() == 0)
             {
                 serviceResult.isSuccess = false;
                 serviceResult.devMsg = "Không có nội dung";
@@ -41,19 +41,20 @@ namespace MISA.VMHUNG.Core.Service
             }
             else
             {
-                serviceResult.data = customers;
+                serviceResult.data = datas;
                 serviceResult.devMsg = "Thành công";
             }
 
             return serviceResult;
         }
-
+   
+        
         public ServiceResult GetById(Guid id)
         {
             serviceResult.isSuccess = true;
             //Lấy dữ dữ liệu
 
-            var entity = _baseRepository.GetById(id);
+            var entity = _baseRepository.GetById<T>(id);
             //Kiểm trả bản ghi có tồn tại không
             if (entity == null)
             {

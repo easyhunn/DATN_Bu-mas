@@ -30,8 +30,26 @@
 // button
 .btn {
   // min-width: 96px;
+  width: 96px;
+  height: 30px;
+  margin: 0.5em 0 !important;
+  cursor: pointer;
+  border-color: #afafaf;
+  color: #212121;
 }
-
+.btn-default {
+  height: 32px;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 4px;
+    min-width: 96px;
+    font-family: Roboto-Regular;
+    font-size: 13px!important;
+    box-shadow: none!important;
+    white-space: nowrap;
+    outline: 0!important;
+    padding: 0 10px;
+}
 [type="button"]:not(:disabled),
 [type="reset"]:not(:disabled),
 [type="submit"]:not(:disabled),
@@ -45,7 +63,10 @@ button:not(:disabled) {
   color: #555;
   font-weight: 600;
 }
-
+.link-primary {
+  color: #0d6efd;
+  text-decoration: underline;
+}
 //tool tip
 .popover {
   .arrow {

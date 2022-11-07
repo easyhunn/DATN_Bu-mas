@@ -73,7 +73,6 @@ export default {
       report.reportName = reportParams.ReportName;
       report.reportAlias = reportParams.ReportName;
 
-      debugger;
       viewer.report = report;
 
       viewer.renderHtml("viewer");

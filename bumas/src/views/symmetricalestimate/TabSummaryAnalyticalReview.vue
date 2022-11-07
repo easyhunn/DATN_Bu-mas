@@ -20,7 +20,7 @@
 <script>
 import EditableTable from "@/components/EditableTable.vue";
 import MDialogVue from "@/components/MDialog.vue";
-import { items, fields } from "./datafake";
+import { items, fields } from "./dataTableField";
 export default {
   name: "TabSummaryAnalyticalReview",
   components: {

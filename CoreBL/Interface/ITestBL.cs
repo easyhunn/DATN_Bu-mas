@@ -11,9 +11,9 @@ namespace CoreBL.Interface
     public interface ITestBL: IBaseBL<Test>
     {
         public string getData();
-        public bool insert();
+        public Task<bool> insert();
         public bool deletes();
-        public bool updates();
+        public Task<bool> updates();
 
     }
 }

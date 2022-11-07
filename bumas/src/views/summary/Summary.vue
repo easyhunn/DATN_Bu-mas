@@ -5,7 +5,7 @@
         <div
           class="nav-item nav-link"
           v-for="(decision, index) in orgDecision"
-          @click="activeDec = index"
+          @click="onSelectView(index)"
           v-bind:class="{ active: activeDec == index }"
         >
           <div class="item-content">
@@ -16,14 +16,16 @@
       </div>
     </nav>
     <div class="summary-container">
-      <ExamineOrg></ExamineOrg>
+      <ExamineOrg :itemData="items" :orgType="activeDec"> </ExamineOrg>
     </div>
   </div>
 </template>
 
 <script>
-import { orgDecision } from "../../testdata.js";
+import { orgDecision } from "../../commonData.js";
 import ExamineOrgVue from "./ExamineOrg.vue";
+import axios from "axios";
+
 export default {
   name: "Summary",
   components: { ExamineOrg: ExamineOrgVue },
@@ -31,7 +33,46 @@ export default {
     return {
       orgDecision: orgDecision,
       activeDec: 0,
+      items: [],
+      defaultItems: [],
     };
+  },
+  methods: {
+    onSelectView(index) {
+      this.activeDec = index;
+      switch (index) {
+        case 0:
+          this.items = this.defaultItems;
+          break;
+        case 1:
+          this.items = this.defaultItems.filter((x) => x.status == 1 || x.status == 4 ||  !x.status);
+          break;
+        default:
+          this.items = this.defaultItems.filter((x) => x.status == index);
+          break;
+      }
+    },
+    async getData() {
+      let me = this;
+      await axios
+        .get("https://localhost:44370/api/Organization/getSubOrgByStatus")
+        .then(async (res) => {
+          let data = res.data
+          if (data) {
+            me.items = data;
+            me.defaultItems = data;
+            me.orgDecision[0].count = data.length;
+            me.orgDecision[1].count = data.filter(x => x.status == 1 || x.status == 4 || !x.status).length;
+            me.orgDecision[2].count = data.filter(x => x.status == 2).length;
+            me.orgDecision[3].count = data.filter(x => x.status == 3).length;
+          }
+          
+        });
+    },
+  },
+  async created() {
+    let me = this;
+    await this.getData();
   },
 };
 </script>

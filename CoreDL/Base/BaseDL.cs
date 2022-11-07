@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using Dapper.Contrib.Extensions;
+using Entity;
 using MySqlConnector;
 using System;
 using System.Collections.Generic;
@@ -21,10 +22,10 @@ namespace MISA.VMHUNG.Infrastructure.DataAccess
         {
             _connectionString = "UserID = root; " +
                 "Host=localhost; " +
-                "DataBase= test; " +
+                "DataBase= vmhung_bumas; " +
                 "port=3306;" +
                 "password=12345678;";
-            var sqlconnection = "server=localhost,3306; database=test;user id=root;password=12345678;TrustServerCertificate=true";
+            var sqlconnection = "server=localhost,3306; database=vmhung_bumas;user id=root;password=12345678;TrustServerCertificate=true";
             this._className = typeof(T).Name;
             this.dbConnection = new MySqlConnection(_connectionString);
         }
@@ -34,14 +35,14 @@ namespace MISA.VMHUNG.Infrastructure.DataAccess
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
         /// Created By: VM Hùng (12/04/2021)
-        public T GetById(Guid id)
-        {
-            var parameters = new DynamicParameters();
-            parameters.Add($"@{_className}Id", id, DbType.String);
-            var storeName = $"Proc_Get{_className}ById";
-            var entity = dbConnection.Query<T>(storeName, parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
-            return entity;
-        }
+        //public T GetById(Guid id)
+        //{
+        //    var parameters = new DynamicParameters();
+        //    parameters.Add($"@{_className}Id", id, DbType.String);
+        //    var storeName = $"Proc_Get{_className}ById";
+        //    var entity = dbConnection.Query<T>(storeName, parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
+        //    return entity;
+        //}
 
         /// <summary>
         /// lấy tất cả khách hàng
@@ -49,10 +50,24 @@ namespace MISA.VMHUNG.Infrastructure.DataAccess
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
         /// Created By: VM Hùng (12/04/2021)
-        public IEnumerable<entity> GetAll<entity>()
+        public IEnumerable<entity> GetAll<entity>(string table = "")
         {
-            var table = typeof(entity).Name;
-            var query = string.Format("Select * from {0}", table);
+            if (string.IsNullOrWhiteSpace(table))
+            {
+                table = typeof(entity).Name;
+            }
+            var orgId = AuthUtil.orgId;
+            var query = string.Format("Select * from {0} where org_id='{1}'", table, orgId);
+            var entities = dbConnection.Query<entity>(query);
+            return entities;
+        }
+        public IEnumerable<entity> GetById<entity>(Guid id, string table = "")
+        {
+            if (string.IsNullOrWhiteSpace(table))
+            {
+                table = typeof(entity).Name;
+            }
+            var query = string.Format("Select * from {0} where id='{1}'", table, id);
             var entities = dbConnection.Query<entity>(query);
             return entities;
         }
@@ -72,13 +87,38 @@ namespace MISA.VMHUNG.Infrastructure.DataAccess
         /// Thêm nhiều
         /// </summary>
         /// <returns></returns>
-        public bool Inserts<entity>(List<entity> entities)
+        public async Task<bool> Inserts<entity>(List<entity> entities)
         {
            var success = false;
            try
             {
-                success = dbConnection.Insert<List<entity>>(entities) > 0;
+                if (entities != null && entities.Count() > 0)
+                {
+                    success = dbConnection.Insert<List<entity>>(entities) > 0;
+                } else
+                {
+                    success = true;
+                }
             } 
+            catch (Exception ex)
+            {
+
+            }
+            return success;
+        }
+        /// <summary>
+        /// Thêm hoặc cập nhật
+        /// </summary>
+        /// <returns></returns>
+        public async Task<bool> InsertorUpdate<entity>(entity entities)
+        {
+            var success = false;
+            try
+            {
+                var lstEntities = new List<entity>();
+                lstEntities.Add(entities);
+                success = dbConnection.Insert<List<entity>>(lstEntities) > 0;
+            }
             catch (Exception ex)
             {
 
@@ -89,12 +129,19 @@ namespace MISA.VMHUNG.Infrastructure.DataAccess
         /// Updates multiple
         /// </summary>
         /// <returns></returns>
-        public bool Updates<entity>(List<entity> entities)
+        public async Task<bool> Updates<entity>(List<entity> entities)
         {
             var success = false;
             try
             {
-                success = dbConnection.Update<List<entity>>(entities);
+                if (entities != null && entities.Count() > 0)
+                {
+                    success = dbConnection.Update<List<entity>>(entities);
+                }
+                else
+                {
+                    success = true;
+                }
             }
             catch (Exception ex)
             {
@@ -119,5 +166,7 @@ namespace MISA.VMHUNG.Infrastructure.DataAccess
             }
             return success;
         }
+        
     }
+    
 }

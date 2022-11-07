@@ -16,12 +16,12 @@
     </nav>
     <div class="summary-container">
       <TabEstimateSummary v-if="activeNav == 1"></TabEstimateSummary>
-      <TabSummaryAnalyticalReview
+      <!-- <TabSummaryAnalyticalReview
         v-if="activeNav == 2"
       ></TabSummaryAnalyticalReview>
       <TabSummarySubmitAndPreview
         v-if="activeNav == 3"
-      ></TabSummarySubmitAndPreview>
+      ></TabSummarySubmitAndPreview> -->
     </div>
   </div>
 </template>
@@ -44,15 +44,7 @@ export default {
         {
           id: 1,
           name: "Tổng hợp",
-        },
-        {
-          id: 2,
-          name: "Phân tích tổng quan",
-        },
-        {
-          id: 3,
-          name: "Nộp và xem kết quả",
-        },
+        }
       ],
       activeNav: 1,
     };

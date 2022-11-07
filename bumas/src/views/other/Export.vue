@@ -122,30 +122,32 @@ export default {
       let excelFile = this.importExcelFile;
       let password = this.password;
 
-      let incrementalEle = document.getElementById("incremental");
-      let loadingStatus = document.getElementById("loadingStatus");
+      // let incrementalEle = document.getElementById("incremental");
+      // let loadingStatus = document.getElementById("loadingStatus");
       // here is excel IO API
       excelIo.open(
         excelFile,
         function (json) {
           let workbookObj = json;
-          if (incrementalEle.checked) {
-            spread.fromJSON(workbookObj, {
-              incrementalLoading: {
-                loading: function (progress, args) {
-                  progress = progress * 100;
-                  loadingStatus.value = progress;
-                  console.log(
-                    "current loading sheet",
-                    args.sheet && args.sheet.name()
-                  );
-                },
-                loaded: function () {},
-              },
-            });
-          } else {
-            spread.fromJSON(workbookObj);
-          }
+          // if (incrementalEle.checked) {
+          //   spread.fromJSON(workbookObj, {
+          //     incrementalLoading: {
+          //       loading: function (progress, args) {
+          //         progress = progress * 100;
+          //         loadingStatus.value = progress;
+          //         console.log(
+          //           "current loading sheet",
+          //           args.sheet && args.sheet.name()
+          //         );
+          //       },
+          //       loaded: function () {},
+          //     },
+          //   });
+          // } else {
+          //   spread.fromJSON(workbookObj);
+          // }
+          spread.fromJSON(workbookObj);
+
         },
         function (e) {
           // process error

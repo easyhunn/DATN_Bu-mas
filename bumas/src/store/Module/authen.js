@@ -11,22 +11,30 @@ let authenStore = {
     id: "",
     sessionId: "",
     jwtToken: "",
+    orgId: "",
+    orgGrade: null,
+    userName: "",
   },
   mutations: {
-    setUser(state, { email, password, token = state.token }) {
+    setUser(state, { email, token = state.token }) {
       state.email = email;
-      state.password = password;
+      state.jwtToken = token;
       state.token = token;
     },
-    setProfile(state, { email, password }) {
+    setProfile(state, { email, password, orgId, userName, orgGrade}) {
       state.email = email;
       state.password = password;
+      state.orgId = orgId;
+      state.userName = userName;
+      state.orgGrade = orgGrade;
       commonFn.setCookie("email", email, 1);
     },
     setJwtToken(state, jwtToken) {
-      state.jwtToken = jwtToken;
-      commonFn.setCookie("jwtToken", jwtToken, 1);
-    },
+      if (jwtToken) {
+        state.jwtToken = jwtToken;
+        commonFn.setCookie("jwtToken", jwtToken, 1);
+      }
+    }
   },
   actions: {
     async signIn(context, { email, password }) {
@@ -45,6 +53,7 @@ let authenStore = {
       context.commit("setUser", {});
       commonFn.deleteCookie("email");
       commonFn.deleteCookie("token");
+      commonFn.deleteCookie("jwtToken");
       // commonFn.deleteCookie("password");
     },
     loginToken({ commit }, credentials) {
@@ -64,6 +73,9 @@ let authenStore = {
       return {
         email: state.email,
         password: state.password,
+        orgId: state.orgId,
+        userName: state.userName,
+        orgGrade: state.orgGrade
       };
     },
     loginStatus(state) {

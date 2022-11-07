@@ -2910,7 +2910,8 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v5.0",
         "dependencies": {
-          "CoreDL": "1.0.0"
+          "CoreDL": "1.0.0",
+          "Microsoft.AspNetCore.Hosting.Abstractions": "2.2.0"
         },
         "compile": {
           "bin/placeholder/CoreBL.dll": {}

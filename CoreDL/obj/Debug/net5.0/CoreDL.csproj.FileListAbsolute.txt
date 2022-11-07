@@ -1,12 +1,4 @@
-D:\Đồ án\CoreDL\bin\Debug\net5.0\CoreDL.deps.json
-D:\Đồ án\CoreDL\bin\Debug\net5.0\CoreDL.dll
-D:\Đồ án\CoreDL\bin\Debug\net5.0\ref\CoreDL.dll
-D:\Đồ án\CoreDL\bin\Debug\net5.0\CoreDL.pdb
-D:\Đồ án\CoreDL\obj\Debug\net5.0\CoreDL.csprojAssemblyReference.cache
 D:\Đồ án\CoreDL\obj\Debug\net5.0\CoreDL.GeneratedMSBuildEditorConfig.editorconfig
 D:\Đồ án\CoreDL\obj\Debug\net5.0\CoreDL.AssemblyInfoInputs.cache
 D:\Đồ án\CoreDL\obj\Debug\net5.0\CoreDL.AssemblyInfo.cs
 D:\Đồ án\CoreDL\obj\Debug\net5.0\CoreDL.csproj.CoreCompileInputs.cache
-D:\Đồ án\CoreDL\obj\Debug\net5.0\CoreDL.dll
-D:\Đồ án\CoreDL\obj\Debug\net5.0\ref\CoreDL.dll
-D:\Đồ án\CoreDL\obj\Debug\net5.0\CoreDL.pdb

@@ -1,11 +1,11 @@
 <template>
   <div id="app">
     <div class="app-container">
-      <div class="layout-menu" v-if="true">
+      <div class="layout-menu" v-if="isLogin">
         <Menu></Menu>
       </div>
       <div class="layout-content">
-        <div class="content-header" v-if="true">
+        <div class="content-header" v-if="isLogin">
           <Header></Header>
         </div>
         <div class="content-container">
@@ -43,6 +43,8 @@ export default {
 </script>
 
 <style lang="scss">
+@import "~ag-grid-community/styles/ag-grid.css";
+@import "~ag-grid-community/styles/ag-theme-alpine.css";
 html {
   overflow: hidden;
 }

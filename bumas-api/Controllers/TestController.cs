@@ -41,7 +41,9 @@ namespace bumas_api.Controllers
         [HttpPost]
         public bool Insert()
         {
-            return _testBL.insert();
+            //return _testBL.insert();
+            return true;
+
         }
         [HttpDelete]
         public bool Deletes()
@@ -51,7 +53,8 @@ namespace bumas_api.Controllers
         [HttpPut]
         public bool Updates()
         {
-            return _testBL.updates();
+            return true;
+            //return _testBL.updates();
         }
     }   
 }

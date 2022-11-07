@@ -21,6 +21,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using CoreBL;
 
 namespace bumas_api
 {
@@ -135,7 +136,18 @@ namespace bumas_api
 
             services.AddScoped(typeof(ITestBL), typeof(TestBL));
             services.AddScoped(typeof(ITestDL), typeof(TestDL));
+            services.AddScoped(typeof(IAccountBL), typeof(AccountBL));
+            services.AddScoped(typeof(IAccountDL), typeof(AccountDL));
+            services.AddScoped(typeof(IReportSettingBL), typeof(ReportSettingBL));
+            services.AddScoped(typeof(IReportSettingDL), typeof(ReportSettingDL));
+            services.AddScoped(typeof(IOrganizationBL), typeof(OrganizationBL));
+            services.AddScoped(typeof(IOrganizationDL), typeof(OrganizationDL));
+            services.AddScoped(typeof(IEstimateBL), typeof(EstimateBL));
+            services.AddScoped(typeof(IEstimateDL), typeof(EstimateDL));
+            services.AddScoped(typeof(ITemplateWorkbookBL), typeof(TemplateWorkbookBL));
+            services.AddScoped(typeof(ITemplateWorkbookDL), typeof(TemplateWorkbookDL));
         }
         #endregion
     }
+
 }

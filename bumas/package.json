@@ -10,6 +10,8 @@
     "@grapecity/spread-excelio": "^15.1.4",
     "@grapecity/spread-sheets-charts": "^15.1.4",
     "@grapecity/spread-sheets-vue": "^15.1.4",
+    "ag-grid-community": "^28.2.0",
+    "ag-grid-vue": "^28.2.0",
     "axios": "^0.27.2",
     "bootstrap": "^4.5.3",
     "bootstrap-vue": "^2.22.0",
@@ -17,6 +19,7 @@
     "stimulsoft-reports-js": "^2022.4.1",
     "vue": "^2.6.14",
     "vue-click-outside": "^1.1.0",
+    "vue-property-decorator": "^8.0.0",
     "vue-router": "^3.5.1",
     "vuex": "^3.6.2"
   },

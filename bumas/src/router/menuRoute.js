@@ -11,6 +11,9 @@ import Other from "../views/other/Other.vue";
 import Dictionary from "../views/dictionary/Dictionary.vue";
 import Login from "../views/authen/Login.vue";
 import ReportViewer from "../views/report/ReportViewer.vue";
+import ReportSettingViewer from "../views/other/ReportSettingViewer.vue";
+import ReportSummaryViewer from "../views/other/ReportSummaryViewer.vue";
+import ViewSubmitSummary from "../views/symmetricalestimate/ViewSubmitSummary.vue";
 
 Vue.use(VueRouter);
 const routes = [
@@ -72,7 +75,30 @@ const routes = [
     name: "ReportViewer",
     component: ReportViewer,
     meta: { requiresAuth: true },
+    props: true,
   },
+  {
+    path: "/report-setting-viewer",
+    name: "ReportSettingViewer",
+    component: ReportSettingViewer,
+    meta: { requiresAuth: true },
+    props: true,
+  },
+  {
+    path: "/report-summary-viewer",
+    name: "ReportSummaryViewer",
+    component: ReportSummaryViewer,
+    meta: { requiresAuth: true },
+    props: true,
+  },
+  {
+    path: "/view-submit-summary",
+    name: "ViewSubmitSummary",
+    component: ViewSubmitSummary,
+    meta: { requiresAuth: true },
+    props: true,
+  },
+  
 ];
 
 const router = new VueRouter({
@@ -89,7 +115,7 @@ router.beforeEach((to, from, next) => {
   }
   let isLogin = store.getters["authen/loginStatus"];
   const requiresAuth = to.matched.some((record) => record.meta.requiresAuth);
-  isLogin = true;
+  // isLogin = true;
   if (requiresAuth && !isLogin) next("/login");
   else next();
 });

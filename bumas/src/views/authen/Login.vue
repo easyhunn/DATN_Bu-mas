@@ -86,7 +86,6 @@ export default {
           Password: this.password,
         })
         .then((res) => {
-          debugger;
           console.log(this.authenEmail);
           if (this.authenEmail && this.jwtToken) {
             this.$router.push("/");

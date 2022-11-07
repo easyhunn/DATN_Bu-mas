@@ -21,7 +21,7 @@ namespace CoreBL.Base
         {
             return _testDL.getData();
         }
-        public bool insert()
+        public async Task<bool> insert()
         {
             var listCity = new List<City>();
             var city1 = new City("Bac Ninh", "Hung Yen");
@@ -29,7 +29,7 @@ namespace CoreBL.Base
             listCity.Add(city1);
             listCity.Add(city2);
 
-            return _testDL.Inserts<City>(listCity);
+            return await _testDL.Inserts<City>(listCity);
         }
         public bool deletes()
         {
@@ -41,7 +41,7 @@ namespace CoreBL.Base
 
             return _testDL.Deletes<City>(listCity);
         }
-        public bool updates()
+        public async Task<bool> updates()
         {
             var listCity = new List<City>();
             var city1 = new City("Bac Ninh1", "Hung Yen4", new Guid("212bdefa-f521-467b-8b16-c1eccde67eb5"));
@@ -49,7 +49,7 @@ namespace CoreBL.Base
             listCity.Add(city1);
             listCity.Add(city2);
 
-            return _testDL.Updates<City>(listCity);
+            return await _testDL.Updates<City>(listCity);
         }
     }
 }

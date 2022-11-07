@@ -14,37 +14,45 @@
     <div class="content">
       <div class="allocation-decision-item">
         <div class="item add-allocation-decision">
-          <div class="wrap-content" id="btnAddSubmit">
+          <div class="wrap-content" id="btnAddSubmit" @click="addSubmit()">
             <div class="ic-add-1"></div>
             <div class="item-name">Tạo lần nộp</div>
           </div>
         </div>
         <div class="list-item">
           <div class="wrap-item">
-            <div class="item">
-              <div class="content-row row">
+            <div class="item mt-2" v-for="item in submitList">
+              <div class="content-row row" >
                 <div class="item-content name col-4">
                   <div class="main-info">
                     <div class="ic-edit"></div>
                     <div class="item-name text-item">
-                      Dự toán thu - chi năm 2022 lần 2
+                      {{ item.name }}
                     </div>
                   </div>
                 </div>
                 <div class="item-content item-date decision-date col-2">
-                  <div class="text-date text-item">24/01/2022</div>
+                  <div class="text-date text-item">{{ item.date }}</div>
                 </div>
                 <div class="item-content item-created-by created-by col-2">
-                  <div class="text-item text-item">Nguyễn Hồng Sơn</div>
+                  <div class="text-item text-item">
+                    <span v-if="item.status == 1">chưa nộp</span>
+                    <span v-if="item.status == 2">chờ duyệt</span>
+                    <span v-if="item.status == 3">hoàn thành</span>
+                    <span v-if="item.status == 4">gửi trả</span>
+                  </div>
                 </div>
                 <div class="item-content status status-decision col-2">
-                  <div class="text-item-long doing text-item">Chờ duyệt</div>
+                  <div class="text-item-long doing text-item">
+                    {{ item.userName }}
+                  </div>
                 </div>
                 <div class="item-content item-tools col-2">
                   <div class="tools">
                     <div class="btn-group-1 more-tools-group">
                       <div class="text-item-long doing text-item">
-                        Xem dự toán
+                        <span  @click="viewSubmitDetail(item)" class="link-primary">Xem</span> 
+                        <span v-if="auditSubmitEstimate == null || auditSubmitEstimate.status == 4" v-on:click="submitAuditEstimate(item)" class="link-primary"> | nộp</span>
                       </div>
                     </div>
                   </div>
@@ -59,13 +67,84 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   name: "TabSummarySubmitAndPreview",
   components: {},
   data() {
-    return {};
+    return {
+      submitList: [],
+      auditSubmitEstimate: null
+    };
   },
-  methods: {},
+  methods: {
+    addSubmit() {
+      let me = this;
+      let submitCount = this.submitList.length + 1;
+      let newSubmit = {
+        id: me.uuid(),
+        name: "Dự toán thu - chi năm 2022 lần " + submitCount,
+        date: "24/01/2022",
+        userName: "Vũ Mạnh Hùng",
+        status: 1,
+        sortOrder: submitCount,
+      };
+      return axios
+          .post("https://localhost:44370/api/Estimate/AddSubmitEstimate", newSubmit)
+          .then((res) => {
+            me.getSubmitStatusData();
+          });
+      //  this.submitList.unshift(newSubmit);
+    },
+    viewSubmitDetail(item) {
+      if (item.submit_estimate_list_id) {
+        this.$router.push({
+        name: "ViewSubmitSummary",
+        query: { submitSummaryListId: item.submit_estimate_list_id },
+      });
+      }
+      
+    },
+    async getSubmitStatusData() {
+      let me = this;
+      await axios
+        .get("https://localhost:44370/api/Estimate/getSubmitEstimateStatus")
+        .then(async (res) => {
+          me.submitList = res.data;
+        });
+    },
+    async getAuditSubmitStatusData() {
+      let me = this;
+      await axios
+        .get("https://localhost:44370/api/Estimate/submitEstimate")
+        .then(async (res) => {
+          if (res && res.data) {
+            me.auditSubmitEstimate = res.data[0];
+          }
+        });
+    },
+    submitAuditEstimate(item) {
+      let me = this, mode = 1;
+      if (me.auditSubmitEstimate) {
+        me.auditSubmitEstimate.submit_estimate_list_id = item.submit_estimate_list_id;
+        mode = 2;
+      }
+      let param = {
+        Mode: mode,
+        auditEstimateStatus: me.auditSubmitEstimate ?? item
+      }
+      return axios
+          .post("https://localhost:44370/api/Estimate/submitEstimate", param)
+          .then((res) => {
+            me.getAuditSubmitStatusData();
+          });
+    },
+  },
+  async created() {
+    let me = this;
+    await this.getSubmitStatusData();
+    await this.getAuditSubmitStatusData();
+  },
 };
 </script>
 

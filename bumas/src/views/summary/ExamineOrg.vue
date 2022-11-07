@@ -9,6 +9,7 @@
       :isTreeView="false"
       searchPlaceHolder="Nhập tên đơn vị, mã QHNS để tìm kiếm"
       :displayFilter="true"
+      :key="tableKey"
     >
     </EditableTable>
   </div>
@@ -17,9 +18,13 @@
 <script>
 import EditableTable from "@/components/EditableTable.vue";
 import MDialogVue from "@/components/MDialog.vue";
-import { items, fields } from "./datafake";
+import { fields } from "./dataFields";
 export default {
   name: "ExamineOrg",
+  props: {
+    orgType: Number,
+    itemData: Array
+  },
   components: {
     EditableTable,
     MDialogVue,
@@ -27,9 +32,10 @@ export default {
   data() {
     return {
       fields: fields,
-      items: items,
+      items: this.itemData,
       editMode: 0,
       isShowModal: false,
+      tableKey: 0
     };
   },
   methods: {
@@ -47,9 +53,16 @@ export default {
         this.isShowModal = false;
       }
     },
+   
   },
+  
   mounted() {
-    this.testFn();
+  },
+  watch: {
+    itemData() {
+      this.items = this.itemData
+      this.tableKey++;
+    }
   },
 };
 </script>

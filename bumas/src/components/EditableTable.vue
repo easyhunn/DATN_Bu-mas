@@ -2,6 +2,10 @@
   <article class="editable-table">
     <div class="this-inside-table">
       <slot name="title"></slot>
+      <div v-if="editMode == 1" @click="addRowHandler" class="btn-add-new-row d-flex align-items-center">
+        <div class="ic-add-1 ml-0"></div>
+        <span>Thêm dòng</span>
+      </div>
     </div>
     <!-- modal -->
     <b-modal id="popup-confirm" centered title="">
@@ -12,15 +16,15 @@
             variant="light"
             size="md"
             class="float-left"
-            @click="show = false"
+            @click="hideConfirmPopup()"
           >
             Không
           </b-button>
           <b-button
             variant="success"
             size="md"
-            class="float-right"
-            @click="show = false"
+            class="float-right btn btn-default"
+            @click="removeRowHandler()"
           >
             Có
           </b-button>
@@ -65,7 +69,7 @@
                 :key="index"
                 :type="field.type"
                 :value="tableItems[data.index][field.key]"
-                @input="(value) => inputHandler(value, data.index, field.key)"
+                @input="(value) => inputHandler(value, data.index, field.key, field.type)"
               ></b-form-datepicker>
 
               <!-- select -->
@@ -93,7 +97,7 @@
                   :type="field.type"
                   :value="tableItems[data.index][field.key]"
                   @blur="
-                    (e) => inputHandler(e.target.value, data.index, field.key)
+                    (e) => inputHandler(e.target.value, data.index, field.key, field.type)
                   "
                 ></b-form-input>
               </div>
@@ -121,11 +125,15 @@
               <span v-if="!tableItems[data.index].isEdit">Edit</span>
               <span v-else>Done</span>
             </b-button> -->
-            <div
+              
+            <div>
+              <div
+              @click="onSelectRow(data)"
               v-b-modal.popup-confirm
               class="icon-delete"
-              @click="removeRowHandler(data.index)"
             ></div>
+            </div>
+            
           </div>
 
           <!-- display text -->
@@ -182,14 +190,24 @@ export default {
       edittingField: "", // trường đang được sửa
       edittingRowIndex: null, //index Dòng đang được sửa
       searchText: "",
+      selectedRowIndex: null,
+      selectedRow: null, 
     };
   },
   methods: {
     editRowHandler(data) {
       this.tableItems[data.index].isEdit = !this.tableItems[data.index].isEdit;
     },
-    inputHandler(value, index, key) {
+    inputHandler(value, index, key, type=null) {
+      if (type) {
+        if (type.toLocaleLowerCase() == "number") {
+          value = Number(value);
+        }
+      }
       this.tableItems[index][key] = value;
+      if (!this.tableItems[index].isNew) {
+        this.tableItems[index].isUpdate = true; // dùng lúc update row
+      }
       this.$set(this.tableItems, index, this.tableItems[index]);
       this.$emit("input", this.tableItems);
     },
@@ -198,13 +216,24 @@ export default {
         (a, c) => ({ ...a, [c.key]: null }),
         {}
       );
+      let id = this.uuid();
       newRow.isEdit = true;
-      this.tableItems.unshift(newRow);
+      newRow.id = id;
+      newRow.index = id;
+      newRow.isNew = true;
+      this.tableItems.push(newRow);
       this.$emit("input", this.tableItems);
     },
-    removeRowHandler(index) {
-      // this.tableItems = this.tableItems.filter((item, i) => i !== index);
-      // this.$emit("input", this.tableItems);
+    removeRowHandler() {
+      this.$bvModal.hide("popup-confirm");
+      let index = this.selectedRowIndex;
+      if (typeof index == "number") {
+        this.$emit("delete-row", this.tableItems[index]);
+        this.tableItems = this.tableItems.filter((item, i) => i !== index);
+      }
+    },
+    hideConfirmPopup() {
+      this.$bvModal.hide("popup-confirm");
     },
     removeRowsHandler() {
       this.tableItems = this.tableItems.filter((item) => !item.isSelected);
@@ -222,8 +251,9 @@ export default {
     handleEditCell(index, editField) {
       this.edittingField = editField;
       if (this.edittingRowIndex || this.edittingRowIndex == 0) {
-        this.tableItems[this.edittingRowIndex].isEdit = false;
+        // this.tableItems[this.edittingRowIndex].isEdit = false;
       }
+      this.tableItems.forEach(item => item.isEdit = false)
       this.tableItems[index].isEdit = true;
       this.edittingRowIndex = index;
     },
@@ -302,7 +332,17 @@ export default {
      */
     onClickRow(item, index, e) {
       this.$emit("on-click-row", item, index, e);
+      this.selectRow = item;
+      this.selectedRowIndex = index;
     },
+    onSelectRow(row) {
+      this.selectRow = row;
+      this.selectedRowIndex = row?.index;
+    },
+    getData() {
+      // this.$emit("get-data", );
+      return this.tableItems;
+    }
   },
   mounted() {
     // prevent click outside event with popupItem.
@@ -332,20 +372,23 @@ export default {
 
   .custom-th-row {
     border-bottom: 1px solid #dee2e6;
+    text-align: left;
   }
 
   .custom-td,
   .custom-th {
-    padding: 0;
+    padding: 0 6px !important;
     border-top: 1px solid #dee2e6;
     height: 35px;
     border-bottom: 0 !important;
     // border-left: 1px solid #dee2e6;
   }
   .custom-td {
+    padding: 6px !important;
     cursor: pointer;
     .cell-content-text {
-      padding: 0 8px;
+      padding: 6px 8px;
+      height: 38px !important;
     }
     .action-group {
       display: flex;
@@ -394,8 +437,28 @@ export default {
         height: 100%;
         display: flex;
         align-items: center;
+        text-overflow: ellipsis;
       }
     }
   }
+  .btn-add-new-row {
+    cursor: pointer;
+  }
+  .w-200px {
+    min-width: 200px;
+    max-width: 200px;
+    width: 200px;
+  }
+  .w-50px {
+    min-width: 50px;
+    max-width: 50px;
+    width: 50px;
+  }
+  .w-100px {
+    min-width: 100px;
+    max-width: 100px;
+    width: 100px;
+  }
+  
 }
 </style>

@@ -242,16 +242,20 @@
       <div class="user-header">
         <div class="sepetator d-none"></div>
         <div
-          class="avatar"
+          class="d-flex align-items-center"
           data-toggle="dropdown"
-          id="more-setting-avatar"
-          style="
-            background: url(https://id.misa.vn/image/getavatar?userId=8d1489f7-55ba-4f6c-a29b-bc992300e83d&amp;width=100&amp;height=100)
-              center no-repeat;
-          "
-        ></div>
+          id="more-setting"
+        >
+          <div
+            class="avatar"
+            style="
+              background: url(https://id.misa.vn/image/getavatar?userId=8d1489f7-55ba-4f6c-a29b-bc992300e83d&amp;width=100&amp;height=100)
+                center no-repeat;
+            "
+          ></div>
 
-        <div class="more" data-toggle="dropdown" id="more-setting"></div>
+          <div class="more"></div>
+        </div>
 
         <div
           class="dropdown-menu dropdown-menu-right"
@@ -269,6 +273,7 @@
             <a
               class="dropdown-item business-item summary selected"
               href="#"
+              v-on:click="logOut"
               title="Tổng hợp"
               >Đăng xuất</a
             >
@@ -296,10 +301,15 @@ export default {
     hideSettingDropDown() {
       this.showSetting = false;
     },
+    logOut() {
+      this.$store.dispatch("authen/signOut");
+      this.$router.push("/");
+    },
+    directives: {
+      ClickOutside,
+    },
   },
-  directives: {
-    ClickOutside,
-  },
+  
 };
 </script>
 

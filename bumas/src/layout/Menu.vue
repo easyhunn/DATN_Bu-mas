@@ -76,30 +76,30 @@ export default {
           id: 2,
           icon: "symetrical",
         },
-        {
-          name: "Phân bổ, giao dự toán",
-          route: "/allocation",
-          id: 3,
-          icon: "allocation ",
-        },
-        {
-          name: "Theo dõi thực hiện",
-          route: "/movie",
-          id: 7,
-          icon: "trackprogress",
-        },
+        // {
+        //   name: "Phân bổ, giao dự toán",
+        //   route: "/allocation",
+        //   id: 3,
+        //   icon: "allocation ",
+        // },
+        // {
+        //   name: "Theo dõi thực hiện",
+        //   route: "/movie",
+        //   id: 7,
+        //   icon: "trackprogress",
+        // },
         {
           name: "Báo cáo",
           route: "/report",
           id: 8,
           icon: "report",
         },
-        {
-          name: "Danh mục",
-          route: "/dictionary",
-          id: 9,
-          icon: "dictionary",
-        },
+        // {
+        //   name: "Danh mục",
+        //   route: "/dictionary",
+        //   id: 9,
+        //   icon: "dictionary",
+        // },
         {
           name: "Khác",
           route: "/other",
@@ -129,11 +129,11 @@ export default {
           route: "/allocation",
           id: 3,
         },
-        {
-          name: "Theo dõi thực hiện",
-          route: "/movie",
-          id: 7,
-        },
+        // {
+        //   name: "Theo dõi thực hiện",
+        //   route: "/movie",
+        //   id: 7,
+        // },
         {
           name: "Báo cáo",
           route: "/report",
@@ -144,11 +144,11 @@ export default {
           route: "/report-viewer",
           id: 8,
         },
-        {
-          name: "Danh mục",
-          route: "/dictionary",
-          id: 9,
-        },
+        // {
+        //   name: "Danh mục",
+        //   route: "/dictionary",
+        //   id: 9,
+        // },
         {
           name: "Khác",
           route: "/other",

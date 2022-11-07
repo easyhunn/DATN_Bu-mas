@@ -75,3 +75,18 @@
   background-position: -144px -143px;
   cursor: pointer;
 }
+.icon-close {
+  outline: 0;
+  border: none;
+  font-size: 23px;
+  font-weight: 700;
+  background: url("../assets/image/misa-icon.svg") -29px -100px no-repeat;
+  margin-right: 8px;
+  position: absolute;
+  right: 0.3em;
+  width: 20px;
+  margin: -10px 0 0;
+  padding: 1px;
+  height: 20px;
+  cursor: pointer;
+}
